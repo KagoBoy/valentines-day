@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Music, ChevronUp, ChevronDown } from "lucide-react"
+import { Music, ChevronUp, ChevronDown, Volume2, VolumeX } from "lucide-react"
 
 interface SpotifyPlayerProps {
   playlistId: string
@@ -16,6 +16,43 @@ export const SpotifyPlayer = ({
   compact = false,
 }: SpotifyPlayerProps) => {
   const [isExpanded, setIsExpanded] = useState(!compact)
+  const [volume, setVolume] = useState(50) // Volume padrão em 50%
+  const [isMuted, setIsMuted] = useState(false)
+  const [playerKey, setPlayerKey] = useState(0) // Para forçar recarregamento do iframe
+
+  // Atualiza a chave para forçar o recarregamento do iframe quando o volume muda
+  useEffect(() => {
+    setPlayerKey(prev => prev + 1)
+  }, [volume, isMuted])
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted)
+  }
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseInt(e.target.value)
+    setVolume(newVolume)
+    if (newVolume === 0) {
+      setIsMuted(true)
+    } else if (isMuted) {
+      setIsMuted(false)
+    }
+  }
+
+  // Gera a URL do player com os parâmetros necessários
+  const getPlayerUrl = () => {
+    const baseUrl = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=${theme}`
+    const params = new URLSearchParams()
+    
+    // Auto-play
+    params.append('autoplay', 'true')
+    
+    // Volume (0-1)
+    const volumeValue = isMuted ? 0 : volume / 100
+    params.append('volume', volumeValue.toString())
+    
+    return `${baseUrl}&${params.toString()}`
+  }
 
   return (
     <div className="fixed bottom-0 right-0 z-50 mb-4 mr-4 max-w-md w-full md:w-96">
@@ -39,8 +76,26 @@ export const SpotifyPlayer = ({
         )}
 
         <div className="w-full">
+          {/* Controles de volume */}
+          <div className="flex items-center gap-2 p-2 bg-white/80">
+            <button onClick={toggleMute} className="text-rose-600 hover:text-rose-800">
+              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={isMuted ? 0 : volume}
+              onChange={handleVolumeChange}
+              className="w-full h-2 bg-rose-200 rounded-lg appearance-none cursor-pointer"
+            />
+            <span className="text-xs text-rose-600 w-8">{isMuted ? '0%' : `${volume}%`}</span>
+          </div>
+
+          {/* Iframe do Spotify */}
           <iframe
-            src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=${theme}`}
+            key={playerKey}
+            src={getPlayerUrl()}
             width="100%"
             height="352"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
