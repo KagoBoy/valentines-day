@@ -156,7 +156,16 @@ const TreasureModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     {
       title: "💌 SUA PISTA FINAL",
       content:
-        "Na gaveta da penteadeira, atrás da foto do nosso primeiro beijo, está escondido o presente que preparei com todo meu amor para você! 💕",
+        "Aaah, o amor! Tão profundo quanto o mar onde o tesouro se perdeu..." +
+        "Mas escute, escute com atenção, mi amor... nem tudo está perdido!"+
+        "O que foi selado com compromisso, agora espera por você…"+
+
+        "Não busque no oceano, não!"+
+        "Busque onde guardamos o que o tempo não apaga…" +
+        "Memórias em uma caixa, histórias em silêncio…"+
+        "E dentro dela, uma caixinha menor... aquela que chegou com promessas douradas!"+
+
+        "Aha! O tesouro está lá, esperando ser encontrado por quem ama de verdade! 💕",
       animation: "treasure",
     },
   ]
