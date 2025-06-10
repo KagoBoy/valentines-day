@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.png" />
       <body className={`${inter.variable} ${playfair.variable} ${dancing.variable} font-sans`}>{children}</body>
     </html>
   )
