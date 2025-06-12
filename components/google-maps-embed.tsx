@@ -26,7 +26,7 @@ export const GoogleMapsEmbed = ({ location, isVisible }: GoogleMapsEmbedProps) =
     if (location.coordinates) {
       const { lat, lng } = location.coordinates
       const apiKey = "AIzaSyChQma4b9hM1ZGbk_Xc4iazklALXUbsPrI"
-      return `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${lat},${lng}&zoom=15&maptype=roadmap`
+      return `https://maps.googleapis.com/maps/api/js?key=${apiKey}&center=${lat},${lng}&zoom=15&maptype=roadmap`
     }
 
     // Fall back to query if no coordinates
