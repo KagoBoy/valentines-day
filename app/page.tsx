@@ -1035,9 +1035,9 @@ const TreasureHuntContent = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {[
                         "Pra você acreditar - Ferrugem",
-                        "All of Me - John Legend",
-                        "Thinking Out Loud",
-                        "A Thousand Years",
+                        "Camisa 10 - Turma do Pagode",
+                        "Stand By Me",
+                        "Exagerado - Cazuza",
                       ].map((option, index) => (
                         <motion.button
                           key={option}
