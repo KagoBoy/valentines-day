@@ -163,7 +163,8 @@ const TreasureModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         "Não busque no oceano, não!"+
         "Busque onde guardamos o que o tempo não apaga…" +
         "Memórias em uma caixa, histórias em silêncio…"+
-        "E dentro dela, uma caixinha menor... aquela que chegou com promessas douradas!"+
+        "E dentro dela, um saquinho branco… singelo, mas cheio de significado!"+
+        "Aquele que carrega promessas douradas… bem ali, esperando ser descoberto!"+
 
         "Aha! O tesouro está lá, esperando ser encontrado por quem ama de verdade! 💕",
       animation: "treasure",
